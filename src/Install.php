@@ -19,8 +19,8 @@ class Install
      */
     public static function install()
     {
-        copy(__DIR__ . "/framex", base_path() . "/framex");
-        chmod(base_path() . "/framex", 0755);
+        // copy(__DIR__ . "/framex", base_path() . "/framex");
+        // chmod(base_path() . "/framex", 0755);
 
         static::installByRelation();
     }
@@ -31,9 +31,9 @@ class Install
      */
     public static function uninstall()
     {
-        if (is_file(base_path() . "/framex")) {
-            unlink(base_path() . "/framex");
-        }
+        // if (is_file(base_path() . "/framex")) {
+        //     unlink(base_path() . "/framex");
+        // }
 
         self::uninstallByRelation();
     }
