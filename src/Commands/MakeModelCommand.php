@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * @version     1.0.0-dev
+ * @package     FrameX (FX) CLI Plugin
+ * @link        https://localzet.gitbook.io
+ * 
+ * @author      localzet <creator@localzet.ru>
+ * 
+ * @copyright   Copyright (c) 2018-2020 Zorin Projects 
+ * @copyright   Copyright (c) 2020-2022 NONA Team
+ * 
+ * @license     https://www.localzet.ru/license GNU GPLv3 License
+ */
+
 namespace localzet\CLI\Commands;
 
 use Symfony\Component\Console\Command\Command;
@@ -42,7 +55,7 @@ class MakeModelCommand extends Command
             $file = "$path/$class.php";
             $namespace = str_replace('/', '\\', $path);
         }
-            $this->createModel($class, $namespace, $file);
+        $this->createModel($class, $namespace, $file);
 
         return self::SUCCESS;
     }
@@ -75,7 +88,8 @@ class MakeModelCommand extends Command
                     break;
                 }
             }
-        } catch (\Throwable $e) {}
+        } catch (\Throwable $e) {
+        }
         $model_content = <<<EOF
 <?php
 
@@ -112,5 +126,4 @@ class $class extends Model
 EOF;
         file_put_contents($file, $model_content);
     }
-
 }

@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * @version     1.0.0-dev
+ * @package     FrameX (FX) CLI Plugin
+ * @link        https://localzet.gitbook.io
+ * 
+ * @author      localzet <creator@localzet.ru>
+ * 
+ * @copyright   Copyright (c) 2018-2020 Zorin Projects 
+ * @copyright   Copyright (c) 2020-2022 NONA Team
+ * 
+ * @license     https://www.localzet.ru/license GNU GPLv3 License
+ */
+
 namespace localzet\CLI\Commands;
 
 use Symfony\Component\Console\Command\Command;
@@ -42,7 +55,7 @@ class PluginExportCommand extends Command
                 $path_relations[] = "config/plugin/$name";
             }
         }
-        $original_dest = $dest = base_path()."/vendor/$name";
+        $original_dest = $dest = base_path() . "/vendor/$name";
         $dest .= '/src';
         $this->writeInstallFile($namespace, $path_relations, $dest);
         $output->writeln("<info>Создание $dest/Install.php</info>");
@@ -67,10 +80,10 @@ class PluginExportCommand extends Command
     protected function writeInstallFile($namespace, $path_relations, $dest_dir)
     {
         if (!is_dir($dest_dir)) {
-           mkdir($dest_dir, 0777, true);
+            mkdir($dest_dir, 0777, true);
         }
         $relations = [];
-        foreach($path_relations as $relation) {
+        foreach ($path_relations as $relation) {
             $relations[$relation] = $relation;
         }
         $relations = var_export($relations, true);
@@ -144,5 +157,4 @@ class Install
 EOT;
         file_put_contents("$dest_dir/Install.php", $install_php_content);
     }
-
 }

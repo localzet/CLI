@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * @version     1.0.0-dev
+ * @package     FrameX (FX) CLI Plugin
+ * @link        https://localzet.gitbook.io
+ * 
+ * @author      localzet <creator@localzet.ru>
+ * 
+ * @copyright   Copyright (c) 2018-2020 Zorin Projects 
+ * @copyright   Copyright (c) 2020-2022 NONA Team
+ * 
+ * @license     https://www.localzet.ru/license GNU GPLv3 License
+ */
+
 namespace localzet\CLI\Commands;
 
 use Symfony\Component\Console\Command\Command;
@@ -38,12 +51,12 @@ class PluginCreateCommand extends Command
         $namespace = Util::nameToNamespace($name);
 
         // Create dir config/plugin/$name
-        if (is_dir($plugin_config_path = config_path()."/plugin/$name")) {
+        if (is_dir($plugin_config_path = config_path() . "/plugin/$name")) {
             $output->writeln("<error>Папка $plugin_config_path уже существует</error>");
             return self::FAILURE;
         }
 
-        if (is_dir($plugin_path = base_path()."/vendor/$name")) {
+        if (is_dir($plugin_path = base_path() . "/vendor/$name")) {
             $output->writeln("<error>Папка $plugin_path уже существует</error>");
             return self::FAILURE;
         }
@@ -63,18 +76,18 @@ class PluginCreateCommand extends Command
 
     protected function addAutoloadToComposerJson($name, $namespace)
     {
-        if (!is_file($composer_json_file = base_path()."/composer.json")) {
+        if (!is_file($composer_json_file = base_path() . "/composer.json")) {
             return "$composer_json_file не существует";
         }
         $composer_json = json_decode($composer_json_str = file_get_contents($composer_json_file), true);
         if (!$composer_json) {
             return "Некорректный $composer_json_file";
         }
-        if(isset($composer_json['autoload']['psr-4'][$namespace."\\"])) {
+        if (isset($composer_json['autoload']['psr-4'][$namespace . "\\"])) {
             return;
         }
         $namespace = str_replace("\\", "\\\\", $namespace);
-        $composer_json_str = str_replace('"psr-4": {', '"psr-4": {'."\n      \"$namespace\\\\\" : \"vendor/$name/src\",", $composer_json_str);
+        $composer_json_str = str_replace('"psr-4": {', '"psr-4": {' . "\n      \"$namespace\\\\\" : \"vendor/$name/src\",", $composer_json_str);
         file_put_contents($composer_json_file, $composer_json_str);
     }
 
@@ -137,10 +150,10 @@ EOT;
     protected function writeInstallFile($namespace, $path_relations, $dest_dir)
     {
         if (!is_dir($dest_dir)) {
-           mkdir($dest_dir, 0777, true);
+            mkdir($dest_dir, 0777, true);
         }
         $relations = [];
-        foreach($path_relations as $relation) {
+        foreach ($path_relations as $relation) {
             $relations[$relation] = $relation;
         }
         $relations = var_export($relations, true);

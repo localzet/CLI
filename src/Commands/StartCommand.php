@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * @version     1.0.0-dev
+ * @package     FrameX (FX) CLI Plugin
+ * @link        https://localzet.gitbook.io
+ * 
+ * @author      localzet <creator@localzet.ru>
+ * 
+ * @copyright   Copyright (c) 2018-2020 Zorin Projects 
+ * @copyright   Copyright (c) 2020-2022 NONA Team
+ * 
+ * @license     https://www.localzet.ru/license GNU GPLv3 License
+ */
+
 namespace localzet\CLI\Commands;
 
 use Symfony\Component\Console\Command\Command;
@@ -13,7 +26,7 @@ class StartCommand extends Command
     protected static $defaultName = 'start';
     protected static $defaultDescription = 'Запуск сервера в режиме отладки. Используй -d для запуска в режиме демона.';
 
-    protected function configure() : void
+    protected function configure(): void
     {
         $this->addOption('daemon', 'd', InputOption::VALUE_NONE, 'DAEMON mode');
     }
