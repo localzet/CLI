@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @version     1.0.0-dev
  * @package     FrameX (FX) CLI Plugin
  * @link        https://localzet.gitbook.io
  * 
